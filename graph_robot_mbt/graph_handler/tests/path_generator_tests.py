@@ -6,6 +6,9 @@ from graph_robot_mbt.graph_handler.path_generator import PathGenerator
 
 
 class PathGeneratorTests(unittest.TestCase):
+    """
+    Unit Tests for PathGenerator class.
+    """
 
     def setUp(self):
         logging.basicConfig(level=logging.DEBUG)
