@@ -21,7 +21,6 @@ class GraphwalkerWrapper(object):
         logging.basicConfig(level=logging.DEBUG)
         self._cmd = r'java -jar {gw} "$@"'.format(gw=graphwalker_location)
         self._sequence = []
-        self.a = ""
 
     def check_model_format(self, model):
         """
@@ -106,8 +105,3 @@ class GraphwalkerWrapper(object):
 
         self._logger.info('Sequence successfully parsed!')
         return sequence
-
-# if __name__ == '__main__':
-#     gw = GraphwalkerWrapper(r'/home/albert/workspace/projects/graphwalker-cli-3.4.2.jar')
-#     gw.check_model_format(r'/home/albert/workspace/projects/robot-graphwalker/demo/air_handler_system.graphml')
-#     gw.generate_path(r'/home/albert/workspace/projects/robot-graphwalker/demo/air_handler_system.graphml', 'random', 'edge_coverage', '100')
