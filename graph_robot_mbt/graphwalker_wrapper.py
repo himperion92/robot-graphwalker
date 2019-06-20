@@ -95,6 +95,7 @@ class GraphwalkerWrapper(object):
         sequence = []
         self._logger.info('Parsing generated sequence...')
         response = response.split(os.linesep)
+
         if response[-1] == "":
             del response[-1]
 
