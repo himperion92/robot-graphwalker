@@ -21,11 +21,5 @@ class PathGenerator(object):
             r'gw check -m {model_path} "random(edge_coverage(100))"'
             ).format(model_path=model)
         response = subprocess.check_output(check_cmd)
-        
-        if 'No issues found with the model' in response:
-            return True
-        
-        else:
-            return False
 
-    
+        return True if 'No issues found with the model' in response else False
