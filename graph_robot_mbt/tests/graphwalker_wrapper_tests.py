@@ -49,7 +49,7 @@ class GraphwalkerWrapperTests(unittest.TestCase):
         retrieved_paths = ''.join((r'{"modelName":"air_handler_system"}', os.linesep)) + ''.join((r'{"modelName":"air_handler_system","data":[],"currentElementID":"n1","currentElementName":"Idle","properties":[{"x":380},{"y":225}]}', os.linesep)) + ''.join((r'{"modelName":"air_handler_system","data":[],"currentElementID":"e2","currentElementName":"TurnAcOn","properties":[]}', os.linesep)) + ''.join((r'{"modelName":"air_handler_system","data":[],"currentElementID":"n3","currentElementName":"CoolingDown","properties":[{"x":240},{"y":321}]}', os.linesep)) + ''.join((r'{"modelName":"air_handler_system","data":[],"currentElementID":"e9","currentElementName":"ReachTemp","properties":[]}', os.linesep)) + ''.join((r'{"modelName":"air_handler_system","data":[],"currentElementID":"n1","currentElementName":"Idle","properties":[{"x":380},{"y":225}]}', os.linesep))
         expected_path = [{"modelName": "air_handler_system"},
                          {"modelName": "air_handler_system", "data": [],
-                          "currentElementID":"n1", 
+                          "currentElementID":"n1",
                           "currentElementName":"Idle",
                           "properties":[{"x": 380}, {"y": 225}]},
                          {"modelName": "air_handler_system", "data": [],
@@ -73,4 +73,4 @@ class GraphwalkerWrapperTests(unittest.TestCase):
         subprocess_mock.assert_called_once_with(
             r'{cmd} offline -o -m {model} "random(edge_coverage(100))"'
             ''.format(cmd=self._gw._cmd, model=model), shell=True)
-        self.assertEqual(expected_path, self._gw._sequence)
+        self.assertEqual(expected_path, self._gw.sequence)

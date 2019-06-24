@@ -10,8 +10,8 @@ class GraphwalkerWrapper(object):
         Initializes python graphwalker wrapper.
 
         Args:
-            graphwalker_location (str): path to the location of graphwalker.jar
-                file.
+            graphwalker_location (str): path to the location of graphwalker
+            .jar file.
 
         Returns:
             None.
@@ -20,7 +20,7 @@ class GraphwalkerWrapper(object):
         self._logger = logging.getLogger(__name__)
         logging.basicConfig(level=logging.DEBUG)
         self._cmd = r'java -jar {gw} "$@"'.format(gw=graphwalker_location)
-        self._sequence = []
+        self.sequence = []
 
     def check_model_format(self, model):
         """
@@ -77,7 +77,7 @@ class GraphwalkerWrapper(object):
             r'{cmd} offline -o -m {model_path} "random(edge_coverage(100))"'
             ).format(cmd=self._cmd, model_path=model)
         response = subprocess.check_output(offline_cmd, shell=True)
-        self._sequence = self._parse_sequence(response)
+        self.sequence = self._parse_sequence(response)
         self._logger.info('Execution path successfully generated!')
 
     def _parse_sequence(self, response):
