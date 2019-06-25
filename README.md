@@ -13,6 +13,8 @@ Graph editor tool. Graphs can be exported in .graphml format that will be used a
 ### Robot Framework
 Generic Python-native test automation tool. [https://robotframework.org/](https://robotframework.org/)
 
+## Examples
+
 _Example for `robot_graphic_sequence`_:
 
 _1.  Full test coverage:_
@@ -25,7 +27,7 @@ _2.  Randomized 50% coverage:_
 python robot_graphic_sequence\graphwalker_exec.py -g robot-graphwalker\demo\models\coffee_machine_system.graphml -s random -c 50 -t "Coffee System" -r reports -l "robot-graphwalker/demo/robot_libs/CoffeeMachineExtendedLibrary"
 ```
 
-##### Constraints
+## Constraints
 * Only Python3 for the moment!
 * Currently it is not possible generate physical test cases .robot files from robot api.
 * Current version of `robot_graphic_sequence` does not support Guards (conditions) within the edges, it does support Actions 
