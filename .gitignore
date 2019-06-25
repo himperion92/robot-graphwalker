@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# robot framework reports
+reports/*
+
 # VS code
 .vscode
 

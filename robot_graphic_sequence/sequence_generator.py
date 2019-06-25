@@ -5,28 +5,31 @@ import networkx as nx
 from networkx.readwrite import graphml
 
 
-class GraphSequenceGenerator(object):
+class SequenceGenerator(object):
     _AVAILABLE_PATH_STRATEGIES = ['random', 'full']
 
     def __init__(self):
         self._logger = logging.getLogger(__name__)
 
-    def generate_graph_sequences(self, file_path, path_strategy, **options):
+    def generate_sequences(self, file_path, path_strategy, **options):
         """
-        Generates all the possible sequences for a graph file given a path generation strategy.
+        Generates all the possible sequences for a graph file given a path
+        generation strategy.
 
         Args:
             file_path (str): path where .graphml file is located.
-            path_strategy (str): strategy for path generation. Following values are allowed:
-                - 'full' for generating every single path combination
-                - 'random' for generating random path combinations
-            **options: current available option is 'coverage'. This argument is used as the
-                test cases coverage in case that 'random' path_strategy is selected.
+            path_strategy (str): strategy for path generation. Following values
+            are allowed:
+                - 'full' for generating every single path combination.
+                - 'random' for generating random path combinations.
+            **options: current available option is 'coverage'. This argument is
+            used as the test cases coverage in case that 'random' path_strategy
+            is selected.
 
         Returns:
-            dict: dictionary with nodes information
-            dict: dictionary with edfes information
-            list: list of list with information of all sequences
+            dict: dictionary with nodes information.
+            dict: dictionary with edfes information.
+            list: list of list with information of all sequences.
         """
         path_strategy = path_strategy.lower()
         if path_strategy not in self._AVAILABLE_PATH_STRATEGIES:
@@ -50,13 +53,15 @@ class GraphSequenceGenerator(object):
 
         Args:
             graph (NetworkX graph): graph.
-            coverage (int): percentage of coverage to cover with generated paths.
+            coverage (int): percentage of coverage to cover with generated
+                            paths.
 
         Returns:
-            list: list of generated sequences
+            list: list of generated sequences.
         """
         self._logger.info(
-            r"Generating random sequence with {cov}% coverage...".format(cov=coverage))
+            r"Generating random sequence with {cov}% coverage...".format(
+                cov=coverage))
         e = [e for e in graph.edges_iter()]
         n = [n for n in graph.node]
         now_coverage = 0
@@ -91,8 +96,9 @@ class GraphSequenceGenerator(object):
             if len(exec_seqs) > 1:
                 exec_seqs = sorted(exec_seqs)
                 exec_seqs = [exec_seqs[i] for i in range(len(exec_seqs)) if
-                              i == 0 or exec_seqs[i] != exec_seqs[i - 1]]
-                curr_nodes = list(set([item for sub_list in exec_seqs for item in sub_list]))
+                             i == 0 or exec_seqs[i] != exec_seqs[i - 1]]
+                curr_nodes = list(set([
+                    item for sub_list in exec_seqs for item in sub_list]))
                 now_coverage = float(len(curr_nodes)) / float(len(n)) * 100
 
         self._logger.info("Sequence successfully generated!")
@@ -103,10 +109,10 @@ class GraphSequenceGenerator(object):
         Generates the full sequence for a given graph.
 
         Args:
-            graph (NetworkX graph): graph object
+            graph (NetworkX graph): graph object.
 
         Returns:
-            list: list of generated sequences
+            list: list of generated sequences.
         """
         self._logger.info("Generating full sequence...")
         e = [e for e in graph.edges_iter()]
@@ -151,7 +157,8 @@ class GraphSequenceGenerator(object):
             NetworkX graph object.
         """
 
-        self._logger.info("Decoding '{graph}' graph file...".format(graph=file_path))
+        self._logger.info("Decoding '{graph}' graph file...".format(
+            graph=file_path))
         graph = graphml.read_graphml(file_path)
         self._logger.info("Graph decoded!")
         return graph
