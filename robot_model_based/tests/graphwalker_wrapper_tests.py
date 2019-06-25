@@ -3,7 +3,7 @@ import logging
 import os
 import mock
 
-from graph_robot_mbt.graphwalker_wrapper import GraphwalkerWrapper
+from robot_model_based.graphwalker_wrapper import GraphwalkerWrapper
 
 
 class GraphwalkerWrapperTests(unittest.TestCase):
@@ -41,7 +41,7 @@ class GraphwalkerWrapperTests(unittest.TestCase):
              ]
         )
 
-    @mock.patch(('graph_robot_mbt.graphwalker_wrapper.GraphwalkerWrapper.'
+    @mock.patch(('robot_model_based.graphwalker_wrapper.GraphwalkerWrapper.'
                  '_parse_sequence'))
     @mock.patch('subprocess.check_output')
     def test_generate_path(self, subprocess_mock, parse_seq_mock):

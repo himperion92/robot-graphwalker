@@ -3,7 +3,7 @@ import logging
 import mock
 from robot.running import TestSuite, TestCase
 
-from graph_robot_mbt.robot_test_creator import RobotTestCreator
+from robot_model_based.robot_test_creator import RobotTestCreator
 
 
 class RobotTestCreatorTests(unittest.TestCase):
@@ -73,9 +73,9 @@ class RobotTestCreatorTests(unittest.TestCase):
              mock.call(graph_seq[2]['currentElementName']),
              mock.call(graph_seq[3]['currentElementName'])])
 
-    @mock.patch('graph_robot_mbt.robot_test_creator.RobotTestCreator'
+    @mock.patch('robot_model_based.robot_test_creator.RobotTestCreator'
                 '._create_test_case')
-    @mock.patch('graph_robot_mbt.robot_test_creator.RobotTestCreator'
+    @mock.patch('robot_model_based.robot_test_creator.RobotTestCreator'
                 '._import_test_libs')
     def test_create_test_from_seq(self, import_libs_mock, create_tc_mock):
         graph_seq = [{"modelName": "air_handler_system"},
@@ -101,9 +101,9 @@ class RobotTestCreatorTests(unittest.TestCase):
                                                tags=['tag1', 'tag2'],
                                                description='TC Description')
 
-    @mock.patch('graph_robot_mbt.robot_test_creator.RobotTestCreator'
+    @mock.patch('robot_model_based.robot_test_creator.RobotTestCreator'
                 '._create_test_case')
-    @mock.patch('graph_robot_mbt.robot_test_creator.RobotTestCreator'
+    @mock.patch('robot_model_based.robot_test_creator.RobotTestCreator'
                 '._import_test_libs')
     def test_create_test_from_seq_default(self, import_libs_mock,
                                           create_tc_mock):
