@@ -6,7 +6,7 @@ from networkx.readwrite import graphml
 
 
 class SequenceGenerator(object):
-    _AVAILABLE_PATH_STRATEGIES = ['random', 'full']
+    _AVAILABLE_WALK_STRATEGIES = ['random', 'full']
 
     def __init__(self):
         self._logger = logging.getLogger(__name__)
@@ -32,7 +32,7 @@ class SequenceGenerator(object):
             list: list of list with information of all sequences.
         """
         path_strategy = path_strategy.lower()
-        if path_strategy not in self._AVAILABLE_PATH_STRATEGIES:
+        if path_strategy not in self._AVAILABLE_WALK_STRATEGIES:
             raise ValueError("Selected strategy is not available!")
 
         graph = self._decode_graph(file_path)
