@@ -18,7 +18,6 @@ class GraphwalkerWrapper(object):
         """
 
         self._logger = logging.getLogger(__name__)
-        logging.basicConfig(level=logging.DEBUG)
         self._cmd = r'java -jar {gw} "$@"'.format(gw=graphwalker_location)
         self.sequence = []
 

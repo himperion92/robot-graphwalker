@@ -1,8 +1,8 @@
 import logging
 import argparse
 
-from robot_graphic_sequence.sequence_generator import SequenceGenerator
-from robot_graphic_sequence.robot_test_generator import RobotTestGenerator
+from robot_graphic_seq.sequence_generator import SequenceGenerator
+from robot_graphic_seq.robot_test_generator import RobotTestGenerator
 from robot_test_executor import RobotTestExecutor
 
 
@@ -34,9 +34,8 @@ def main():
     nodes, edges, exec_seq = graph_seq_generator.generate_sequences(
         file_path=args.graph, path_strategy=args.strategy, coverage=coverage)
     test_suite = robot_tc_generator.create_test_suite(args.testsuite,
+                                                      nodes, edges, exec_seq,
                                                       args.libraries)
-    test_suite = robot_tc_generator.create_test_cases(test_suite, nodes, edges,
-                                                      exec_seq)
     robot_tc_executor.execute_test_suite(test_suite, args.report)
 
 

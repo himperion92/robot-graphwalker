@@ -15,7 +15,7 @@ Generic Python-native test automation tool. [https://robotframework.org/](https:
 
 ## Examples
 
-_Example for `robot_graphic_sequence`_:
+_Example for `robot_graphic_seq`_:
 
 _1.  Full test coverage:_
 ```
@@ -29,9 +29,9 @@ python -m robot_graphwalker_cli -g robot-graphwalker/demo/models/coffee_machine_
 
 ## Constraints
 * Only Python2 compatible for the moment!
-* Current version of `robot_graphic_sequence` does not support Guards (conditions) within the edges, it does support Actions 
+* Current version of `robot_graphic_seq` does not support Guards (conditions) within the edges, it does support Actions 
 (arguments) tho. Nodes cannot contain neither Actions or Guards.
-* Current version of `robot_graphic_sequence` does not support test case documentation generation.
-* Current version of `robot_graphic_sequence` does not support specific path configuration.
+* Current version of `robot_graphic_seq` does not support test case documentation generation.
+* Current version of `robot_graphic_seq` does not support specific path configuration.
 
 
