@@ -2,7 +2,7 @@ import logging
 import random
 
 import networkx as nx
-from networkx.readwrite import graphml
+import networkx.readwrite
 
 
 class SequenceGenerator(object):
@@ -11,7 +11,7 @@ class SequenceGenerator(object):
     def __init__(self):
         self._logger = logging.getLogger(__name__)
 
-    def generate_sequences(self, file_path, path_strategy, **options):
+    def generate_sequences(self, file_path, path_strategy, **kwargs):
         """
         Generates all the possible sequences for a graph file given a path
         generation strategy.
@@ -22,24 +22,23 @@ class SequenceGenerator(object):
             are allowed:
                 - 'full' for generating every single path combination.
                 - 'random' for generating random path combinations.
-            **options: current available option is 'coverage'. This argument is
-            used as the test cases coverage in case that 'random' path_strategy
-            is selected.
+            coverage (int). This argument is used as the test cases coverage
+                in case that 'random' path_strategy is selected.
 
         Returns:
-            dict: dictionary with nodes information.
-            dict: dictionary with edfes information.
-            list: list of list with information of all sequences.
+            (dict): dictionary with nodes information.
+            (dict): dictionary with edfes information.
+            (list): list of list with information of all sequences.
         """
         path_strategy = path_strategy.lower()
         if path_strategy not in self._AVAILABLE_WALK_STRATEGIES:
-            raise ValueError("Selected strategy is not available!")
+            raise ValueError('Selected strategy is not available!')
 
         graph = self._decode_graph(file_path)
         exec_seqs = []
 
         if path_strategy == 'random':
-            coverage = options['coverage'] if 'coverage' in options else 100
+            coverage = kwargs['coverage'] if 'coverage' in kwargs else 100
             exec_seqs = self._generate_random_sequence(graph, coverage)
 
         elif path_strategy == 'full':
@@ -57,7 +56,7 @@ class SequenceGenerator(object):
                             paths.
 
         Returns:
-            list: list of generated sequences.
+            (list): list of generated sequences.
         """
         self._logger.info(
             r"Generating random sequence with {cov}% coverage...".format(
@@ -112,7 +111,7 @@ class SequenceGenerator(object):
             graph (NetworkX graph): graph object.
 
         Returns:
-            list: list of generated sequences.
+            (list): list of generated sequences.
         """
         self._logger.info("Generating full sequence...")
         e = [e for e in graph.edges_iter()]
@@ -159,6 +158,6 @@ class SequenceGenerator(object):
 
         self._logger.info("Decoding '{graph}' graph file...".format(
             graph=file_path))
-        graph = graphml.read_graphml(file_path)
+        graph = networkx.readwrite.graphml.read_graphml(file_path)
         self._logger.info("Graph decoded!")
         return graph

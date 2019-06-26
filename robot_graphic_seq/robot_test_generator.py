@@ -21,7 +21,7 @@ class RobotTestGenerator(object):
             imports (list): list of libraries to import within the test suite.
 
         Returns:
-            robot.running.model.TestSuite: created test suite object.
+            (robot.running.model.TestSuite): created test suite object.
 
         """
         self._logger.info("Creating '{name}' Test Suite...".format(name=name))
@@ -67,7 +67,7 @@ class RobotTestGenerator(object):
             exec_seq (list): single sequence of nodes to execute.
 
         Returns:
-            str: generated test case name.
+            (str): generated test case name.
         """
         self._logger.debug(
             r"Generating test name for sequence {exec_seq}".format(
