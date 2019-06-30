@@ -22,6 +22,7 @@ class RobotTestCreator(object):
             description (str, optional): description of the test case.
 
         Returns:
+            (robot.running.model.TestSuite): created test suite object.
         """
 
         suite_name = kwargs.pop('suite_name', graph_seq[0]['modelName'])
@@ -32,6 +33,7 @@ class RobotTestCreator(object):
         self._import_test_libs(libs)
         self._create_test_case(graph_seq, **kwargs)
         self._logger.info('Test suite successfully created.')
+        return self.test_suite
 
     def _import_test_libs(self, libs):
 

@@ -89,17 +89,20 @@ class RobotTestCreatorTests(unittest.TestCase):
                       "currentElementID": "n4", "currentElementName": "OFF",
                       "properties":[{"x": 608}, {"y": 116}]}]
         libs = ['Lib1', 'Lib2']
-        self._tc_creator.create_test_from_seq(graph_seq, libs,
-                                              suite_name='ts1',
-                                              test_name='tc1',
-                                              tags=['tag1', 'tag2'],
-                                              description='TC Description')
+
+        test_suite = self._tc_creator.create_test_from_seq(graph_seq, libs,
+                                                           suite_name='ts1',
+                                                           test_name='tc1',
+                                                           tags=['tag1',
+                                                                 'tag2'],
+                                                           description='desc')
+        self.assertEqual(test_suite, self._tc_creator.test_suite)
         self.assertEqual('ts1', self._tc_creator.test_suite.name)
         import_libs_mock.assert_called_once_with(libs)
         create_tc_mock.assert_called_once_with(graph_seq,
                                                test_name='tc1',
                                                tags=['tag1', 'tag2'],
-                                               description='TC Description')
+                                               description='desc')
 
     @mock.patch('robot_model_based.robot_test_creator.RobotTestCreator'
                 '._create_test_case')
@@ -118,7 +121,8 @@ class RobotTestCreatorTests(unittest.TestCase):
                       "currentElementID": "n4", "currentElementName": "OFF",
                       "properties":[{"x": 608}, {"y": 116}]}]
         libs = ['Lib1', 'Lib2']
-        self._tc_creator.create_test_from_seq(graph_seq, libs)
+        test_suite = self._tc_creator.create_test_from_seq(graph_seq, libs)
+        self.assertEqual(test_suite, self._tc_creator.test_suite)
         self.assertEqual(graph_seq[0]['modelName'],
                          self._tc_creator.test_suite.name)
         import_libs_mock.assert_called_once_with(libs)

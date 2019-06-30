@@ -107,7 +107,6 @@ class RobotTestGeneratorTests(unittest.TestCase):
                                          self._EXEC_SEQS[0])
         test_case.keywords.create.assert_has_calls(
             [
-                mock.call('Start'),
                 mock.call('turn_on'),
                 mock.call('idle'),
                 mock.call('turn_off'),

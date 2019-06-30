@@ -4,6 +4,10 @@ import json
 import subprocess
 
 
+class IncorrectModelError(Exception):
+    "Exception raised when a graph model has an incorrect format."
+
+
 class GraphwalkerWrapper(object):
     def __init__(self, graphwalker_location):
         """
@@ -29,7 +33,11 @@ class GraphwalkerWrapper(object):
             model (str): path to the .graphml model file.
 
         Returns:
-            True if format is correct, False otherwise.
+            None.
+
+        Raises:
+            IncorrectModelError: whenever the format of the graph model is
+                incorrect.
         """
 
         self._logger.info(
@@ -39,13 +47,8 @@ class GraphwalkerWrapper(object):
             ).format(cmd=self._cmd, model=model)
         response = subprocess.check_output(check_cmd, shell=True)
 
-        if 'No issues found with the model' in response:
-            self._logger.info('Model format is correct!')
-            return True
-
-        else:
-            self._logger.error('Model format is incorrect!')
-            return False
+        if 'No issues found with the model' not in response:
+            raise IncorrectModelError(r'Model format is incorrect!')
 
     def generate_path(self, model, generator, stop_condition, condition):
         """
@@ -65,7 +68,7 @@ class GraphwalkerWrapper(object):
                 is required.
 
         Returns:
-            None.
+            Generated sequence.
         """
 
         self._logger.info(
@@ -78,6 +81,7 @@ class GraphwalkerWrapper(object):
         response = subprocess.check_output(offline_cmd, shell=True)
         self.sequence = self._parse_sequence(response)
         self._logger.info('Execution path successfully generated!')
+        return self.sequence
 
     def _parse_sequence(self, response):
         """

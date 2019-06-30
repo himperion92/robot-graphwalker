@@ -8,8 +8,9 @@ from robot_test_executor import RobotTestExecutor
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Graphwalker - Robot Framework test case generator.')
-    parser.add_argument('--graph', '-g', help='Path to the graph file', 
+        description='Graphwalker - Robot Framework graphical sequence test'
+                    ' case generator.')
+    parser.add_argument('--graph', '-g', help='Path to the graph file',
                         required=True)
     parser.add_argument('--strategy', '-s',
                         help='assign a path generator strategy: random, or'
@@ -20,10 +21,10 @@ def main():
                         required=False)
     parser.add_argument('--testsuite', '-t', help='Test Suite name',
                         required=True)
-    parser.add_argument('--report', '-r', help='Path where the report files'
-                        'will be stored', required=True)
     parser.add_argument('--libraries', '-l', nargs='+',
                         help='libraries to be imported', required=True)
+    parser.add_argument('--report', '-r', help='Path where the report files'
+                        'will be stored', required=True)
 
     args = parser.parse_args()
     graph_seq_generator = SequenceGenerator()

@@ -3,7 +3,8 @@ import logging
 import os
 import mock
 
-from robot_model_based.graphwalker_wrapper import GraphwalkerWrapper
+from robot_model_based.graphwalker_wrapper import GraphwalkerWrapper, \
+    IncorrectModelError
 
 
 class GraphwalkerWrapperTests(unittest.TestCase):
@@ -25,10 +26,12 @@ class GraphwalkerWrapperTests(unittest.TestCase):
         incorrect_model = 'incorrect_model.graphml'
         subprocess_mock.side_effect = ['No issues found with the model(s).',
                                        'Error']
-        response = self._gw.check_model_format(correct_model)
-        self.assertEqual(True, response)
-        response = self._gw.check_model_format(incorrect_model)
-        self.assertEqual(False, response)
+        self._gw.check_model_format(correct_model)
+        
+        with self.assertRaises(IncorrectModelError) as err:
+            self._gw.check_model_format(incorrect_model)
+
+        self.assertEqual(r'Model format is incorrect!', str(err.exception))
         subprocess_mock.assert_has_calls(
             [mock.call(r'{cmd} check -m {model_path} '
                        r'"random(edge_coverage(100))"'.format(
@@ -69,7 +72,8 @@ class GraphwalkerWrapperTests(unittest.TestCase):
                          ]
         parse_seq_mock.side_effect = [expected_path]
         subprocess_mock.side_effect = [retrieved_paths]
-        self._gw.generate_path(model, 'random', 'edge_coverage', '100')
+        seq = self._gw.generate_path(model, 'random', 'edge_coverage', '100')
+        self.assertEqual(seq, self._gw.sequence)
         subprocess_mock.assert_called_once_with(
             r'{cmd} offline -o -m {model} "random(edge_coverage(100))"'
             ''.format(cmd=self._gw._cmd, model=model), shell=True)

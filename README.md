@@ -19,12 +19,12 @@ _Example for `robot_graphic_seq`_:
 
 _1.  Full test coverage:_
 ```
-python -m robot_graphwalker_cli -g robot-graphwalker/demo/models/coffee_machine_system.graphml -s full -t "Coffee System" -r reports -l "robot-graphwalker/demo/robot_libs/CoffeeMachineExtendedLibrary"
+python -m robot_graphic_seq_cli -g robot-graphwalker/demo/models/coffee_machine_system.graphml -s full -t "Coffee System" -l "robot-graphwalker/demo/robot_libs/CoffeeMachineExtendedLibrary" -r reports
 ```
 
 _2.  Randomized 50% coverage:_
 ```
-python -m robot_graphwalker_cli -g robot-graphwalker/demo/models/coffee_machine_system.graphml -s random -c 50 -t "Coffee System" -r reports -l "robot-graphwalker/demo/robot_libs/CoffeeMachineExtendedLibrary"
+python -m robot_graphic_seq_cli -g robot-graphwalker/demo/models/coffee_machine_system.graphml -s random -c 50 -t "Coffee System" -l "robot-graphwalker/demo/robot_libs/CoffeeMachineExtendedLibrary" -r reports
 ```
 
 ## Constraints

@@ -105,8 +105,8 @@ class RobotTestGenerator(object):
             "Creating test case '{name}' for sequence '{path}'...".format(
                 name=test_case.name, path=exec_seq))
 
-        if str(nodes[exec_seq[0]]['label']).lower() == 'start':
-            test_case.keywords.create(nodes[exec_seq[0]]['label'])
+        #if str(nodes[exec_seq[0]]['label']).lower() == 'start':
+        #    test_case.keywords.create(nodes[exec_seq[0]]['label'])
 
         for i in range(len(exec_seq) - 1):
             self._logger.debug("Generating test case keywords...")
@@ -115,13 +115,13 @@ class RobotTestGenerator(object):
             edge_label = edges[prev_node][curr_node]['label']
 
             # in case edge contains an Action
-            if len(edge_label.split('/')) > 1:
-                test_case.keywords.create(edge_label.split('/')[0],
-                                          args=[edge_label.split('/')[1]])
+            # if len(edge_label.split('/')) > 1:
+            #    test_case.keywords.create(edge_label.split('/')[0],
+            #                              args=[edge_label.split('/')[1]])
 
             # in case edge does not contain an Action
-            else:
-                test_case.keywords.create(edge_label)
+            #else:
+            test_case.keywords.create(edge_label)
 
             test_case.keywords.create(nodes[curr_node]['label'])
 
