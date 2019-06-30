@@ -15,16 +15,22 @@ Generic Python-native test automation tool. [https://robotframework.org/](https:
 
 ## Examples
 
+_Example for `robot_model_based`_:
+
+```
+python -m robot_model_based_cli -w /home/bob/workspace/projects/graphwalker-cli-3.4.2.jar  -g robot-graphwalker/demo/models/air_handler_system.graphml -e random -s edge_coverage -c 100 -t "Coffee System" -n "Basic Coffee System" -l "AirHandlerStatesLibrary" "AirHandlerActionsLibrary" -r reports
+```
+
 _Example for `robot_graphic_seq`_:
 
 _1.  Full test coverage:_
 ```
-python -m robot_graphic_seq_cli -g robot-graphwalker/demo/models/coffee_machine_system.graphml -s full -t "Coffee System" -l "robot-graphwalker/demo/robot_libs/CoffeeMachineExtendedLibrary" -r reports
+python -m robot_graphic_seq_cli -g robot-graphwalker/demo/models/coffee_machine_system.graphml -s full -t "Coffee System" -l "CoffeeMachineExtendedLibrary" -r reports
 ```
 
 _2.  Randomized 50% coverage:_
 ```
-python -m robot_graphic_seq_cli -g robot-graphwalker/demo/models/coffee_machine_system.graphml -s random -c 50 -t "Coffee System" -l "robot-graphwalker/demo/robot_libs/CoffeeMachineExtendedLibrary" -r reports
+python -m robot_graphic_seq_cli -g robot-graphwalker/demo/models/coffee_machine_system.graphml -s random -c 50 -t "Coffee System" -l "CoffeeMachineExtendedLibrary" -r reports
 ```
 
 ## Constraints

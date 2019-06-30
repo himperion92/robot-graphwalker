@@ -9,6 +9,8 @@ from robot_test_executor import RobotTestExecutor
 def main():
     parser = argparse.ArgumentParser(
         description='Graphwalker - Robot Framework model based test generator')
+    parser.add_argument('--graphwalker', '-w', help='Path to the graphwalker'
+                        '.jar file', required=True)
     parser.add_argument('--graph', '-g', help='Path to the graph file',
                         required=True)
     parser.add_argument('--generator', '-e',
@@ -39,18 +41,25 @@ def main():
                         'will be stored', required=True)
 
     args = parser.parse_args()
-    graphwalker_wrapper = GraphwalkerWrapper()
+    graphwalker_wrapper = GraphwalkerWrapper(args.graphwalker)
     robot_tc_creator = RobotTestCreator()
     robot_tc_executor = RobotTestExecutor()
-
+    print -1
     graphwalker_wrapper.check_model_format(args.graph)
-    graph_sequence = graphwalker_wrapper.generate_path(
-        args.graph, args.generatorm,
-        args.stopcondition, args.condition)
+    print 0
+    graph_sequence = graphwalker_wrapper.generate_path(args.graph,
+                                                       args.generator,
+                                                       args.stopcondition,
+                                                       args.condition)
     print 1
-    test_suite = robot_tc_creator(
-        graph_sequence, args.libs, suite_name=args.testsuite,
+    test_suite = robot_tc_creator.create_test_from_seq(
+        graph_sequence, args.libraries, suite_name=args.testsuite,
         test_name=args.testcase)
     print 2
     robot_tc_executor.execute_test_suite(test_suite, args.report)
     print 3
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG)
+    main()
+
