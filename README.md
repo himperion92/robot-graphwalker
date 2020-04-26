@@ -4,8 +4,7 @@ Graphwalker and Robot Framework integrated solution for Model Based Testing and 
 ## Key Concepts
 
 ### Graphwalker
-Open-source tool for executing tests based on sequence diagrams. Executes combinations of paths given a graphml file
-and some set of functions which match by naming convention with graphml nodes and edges. [http://graphwalker.github.io/](http://graphwalker.github.io/)
+Open-source tool for executing tests based on sequence diagrams. Executes combinations of paths given a graphml file and some set of functions that match by naming convention with graphml nodes and edges. [http://graphwalker.github.io/](http://graphwalker.github.io/)
 
 ### yED
 Graph editor tool. Graphs can be exported in .graphml format that will be used as an input of graphwalker-based tools. [https://www.yworks.com/products/yed](https://www.yworks.com/products/yed)
